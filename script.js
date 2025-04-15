@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const gallery = document.getElementById("gallery");
     const searchBox = document.getElementById("searchBox");
-    const categoryList = document.getElementById("categoryList");
     const modeToggle = document.querySelector(".mode-toggle");
 
     let images = JSON.parse(localStorage.getItem("uploadedImages")) || [
@@ -39,9 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 gallery.appendChild(imageCard);
             });
 
-        updateCategoryDropdown();
         fadeInImages();
-    
 
         function fadeInImages() {
             document.querySelectorAll(".image-card img").forEach(img => {
@@ -50,41 +47,29 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function updateCategoryDropdown() {
-        if (!categoryList) return;
-        categoryList.innerHTML = `<li><a class="dropdown-item" href="#" onclick="displayImages('All')">All</a></li>`;
-        
-        const uniqueCategories = [...new Set(images.map(img => img.category))];
-        uniqueCategories.forEach(category => {
-            const listItem = document.createElement("li");
-            listItem.innerHTML = `<a class="dropdown-item" href="#" onclick="displayImages('${category}')">${category}</a>`;
-            categoryList.appendChild(listItem);
-        });
-    }
-
     window.uploadUserImage = function () {
         const fileInput = document.getElementById("uploadImage");
         const categoryInput = document.getElementById("uploadCategory");
-    
+
         if (!fileInput || !categoryInput) return;
-    
+
         if (fileInput.files.length === 0 || !categoryInput.value.trim()) {
             alert("Please select an image and enter a category!");
             return;
         }
-    
+
         const file = fileInput.files[0];
         const validTypes = ["image/jpeg", "image/png", "image/gif"];
         if (!validTypes.includes(file.type)) {
             alert("Please upload a valid image file (JPEG, PNG, GIF).");
             return;
         }
-    
-        if (file.size > 5 * 1024 * 1024) { // 5MB limit
+
+        if (file.size > 5 * 1024 * 1024) {
             alert("Image size should be less than 5MB.");
             return;
         }
-    
+
         const reader = new FileReader();
         reader.onload = function (e) {
             images.push({ src: e.target.result, category: categoryInput.value.trim() });
@@ -92,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
             displayImages();
         };
         reader.readAsDataURL(file);
-    
+
         fileInput.value = "";
         categoryInput.value = "";
     };
@@ -143,9 +128,9 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
-    let btn = document.getElementById("dark-mode-btn");
-    btn.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+        document.body.classList.toggle("dark-mode");
+        let btn = document.getElementById("dark-mode-btn");
+        btn.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
     }
 
     if (localStorage.getItem("darkMode") === "true") {
