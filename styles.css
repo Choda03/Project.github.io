@@ -76,14 +76,6 @@ h3, h2 {
     color: #007bff;
 }
 
-/* Mode Toggle Button */
-.mode-toggle {
-    font-size: 1.5rem;
-    padding: 0.5rem 1rem;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
 
 /* Upload Section */
 .upload-container {
@@ -289,13 +281,7 @@ body.dark-mode #gallery .gallery-item img {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: url('Motion_Background.gif') no-repeat center center/cover;
-    color: white;
-    transition: background 0.5s ease-in-out;
-}
-
-.dark-mode .home-section {
-    background: url('background.jpg') no-repeat center center/cover;
+    color: rgb(255, 255, 255);
 }
 
 /* Welcome Section */
@@ -401,7 +387,7 @@ button {
 }
 
 button:hover {
-    background: #0056b3;
+    background: #0663ef;
     transform: scale(1.05);
 }
 

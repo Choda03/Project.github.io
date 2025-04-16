@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const gallery = document.getElementById("gallery");
     const searchBox = document.getElementById("searchBox");
-    const modeToggle = document.querySelector(".mode-toggle");
 
     let images = JSON.parse(localStorage.getItem("uploadedImages")) || [
         { src: "nature.webp", category: "Nature" },
@@ -126,20 +125,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     };
-
-    function toggleDarkMode() {
-        document.body.classList.toggle("dark-mode");
-        let btn = document.getElementById("dark-mode-btn");
-        btn.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
-    }
-
-    if (localStorage.getItem("darkMode") === "true") {
-        document.body.classList.add("dark-mode");
-    }
-
-    if (modeToggle) {
-        modeToggle.addEventListener("click", toggleDarkMode);
-    }
 
     displayImages();
     updateFavorites();
